@@ -634,35 +634,7 @@ EFF_COLS = (
                       /($(stats_cell("Damage", weapon))\
                         *$(stats_cell("Precision Multiplier", weapon))\
                         *$(enemy_cell("Critical Multiplier", TANK))))""")),
-    ("Tank~Host",
-        :("""=if(($(eff_cell("Tank~Shots per Tumor", weapon))\
-                  -1)\
-                 *$(stats_cell("Damage", weapon))\
-                 *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Critical Multiplier", TANK))\
-                 *8\
-                 >$(enemy_cell("HP", TANK)),\
-                 roundup($(enemy_cell("HP", TANK))\
-                         /($(stats_cell("Damage", weapon))\
-                           *$(stats_cell("Precision Multiplier", weapon))\
-                           *$(enemy_cell("Critical Multiplier", TANK)))),\
-                 ($(eff_cell("Tank~Shots per Tumor", weapon))\
-                  -1)\
-                 *8\
-                 +roundup(($(enemy_cell("HP", TANK))\
-                            -($(eff_cell("Tank~Shots per Tumor", weapon))\
-                              -1)\
-                            *$(stats_cell("Damage", weapon))\
-                            *$(stats_cell("Precision Multiplier", weapon))\
-                            *$(enemy_cell("Critical Multiplier", TANK))\
-                            *8)\
-                           /($(enemy_cell("Body-Part HP", TANK))\
-                             -($(eff_cell("Tank~Shots per Tumor", weapon))\
-                               -1)\
-                             *$(stats_cell("Damage", weapon))\
-                             *$(stats_cell("Precision Multiplier", weapon))\
-                             *$(enemy_cell("Critical Multiplier", TANK)))))""")),
-    ("Tank~Client",
+    ("Tank~Shots per Kill",
         :("""=roundup($(enemy_cell("HP", TANK))\
                       /($(stats_cell("Pellet Count", weapon))\
                         *min($(stats_cell("Damage", weapon))\
@@ -670,52 +642,18 @@ EFF_COLS = (
                              *$(enemy_cell("Critical Multiplier", TANK))\
                              /$(stats_cell("Pellet Count", weapon)),\
                              $(enemy_cell("Body-Part HP", TANK)))))""")),
-    ("Tank~Host Eff.",
+    ("Tank~Max Eff.",
         :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("Tank~Host", weapon))""")),
-    ("Tank~Client Eff.",
-        :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("Tank~Client", weapon))""")),
-    ("Tank~Host Refills per Kill",
-        :("""=$(eff_cell("Tank~Host", weapon))\
-              /$(stats_cell("Rounds per Refill", weapon))""")),
-    ("Tank~Client Refills per Kill",
-        :("""=$(eff_cell("Tank~Client", weapon))\
+              /$(eff_cell("Tank~Shots per Kill", weapon))""")),
+    ("Tank~Refills per Kill",
+        :("""=$(eff_cell("Tank~Shots per Kill", weapon))\
               /$(stats_cell("Rounds per Refill", weapon))""")),
     ("Mother~Shots per Tumor",
         :("""=roundup($(enemy_cell("Body-Part HP", MOTHER))\
                       /($(stats_cell("Damage", weapon))\
                         *$(stats_cell("Precision Multiplier", weapon))\
                         *$(enemy_cell("Critical Multiplier", MOTHER))))""")),
-    ("Mother~Host",
-        :("""=if(($(eff_cell("Mother~Shots per Tumor", weapon))\
-                  -1)\
-                 *$(stats_cell("Damage", weapon))\
-                 *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Critical Multiplier", MOTHER))\
-                 *8\
-                 >$(enemy_cell("HP", MOTHER)),\
-                 roundup($(enemy_cell("HP", MOTHER))\
-                         /($(stats_cell("Damage", weapon))\
-                           *$(stats_cell("Precision Multiplier", weapon))\
-                           *$(enemy_cell("Critical Multiplier", MOTHER)))),\
-                 ($(eff_cell("Mother~Shots per Tumor", weapon))\
-                  -1)\
-                 *8\
-                 +roundup(($(enemy_cell("HP", MOTHER))\
-                            -($(eff_cell("Mother~Shots per Tumor", weapon))\
-                              -1)\
-                            *$(stats_cell("Damage", weapon))\
-                            *$(stats_cell("Precision Multiplier", weapon))\
-                            *$(enemy_cell("Critical Multiplier", MOTHER))\
-                            *8)\
-                           /($(enemy_cell("Body-Part HP", MOTHER))\
-                             -($(eff_cell("Mother~Shots per Tumor", weapon))\
-                               -1)\
-                             *$(stats_cell("Damage", weapon))\
-                             *$(stats_cell("Precision Multiplier", weapon))\
-                             *$(enemy_cell("Critical Multiplier", MOTHER)))))""")),
-    ("Mother~Client",
+    ("Mother~Shots per Kill",
         :("""=roundup($(enemy_cell("HP", MOTHER))\
                       /($(stats_cell("Pellet Count", weapon))\
                         *min($(stats_cell("Damage", weapon))\
@@ -723,52 +661,18 @@ EFF_COLS = (
                              *$(enemy_cell("Critical Multiplier", MOTHER))\
                              /$(stats_cell("Pellet Count", weapon)),\
                              $(enemy_cell("Body-Part HP", MOTHER)))))""")),
-    ("Mother~Host Eff.",
+    ("Mother~Max Eff.",
         :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("Mother~Host", weapon))""")),
-    ("Mother~Client Eff.",
-        :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("Mother~Client", weapon))""")),
-    ("Mother~Host Refills per Kill",
-        :("""=$(eff_cell("Mother~Host", weapon))\
-              /$(stats_cell("Rounds per Refill", weapon))""")),
-    ("Mother~Client Refills per Kill",
-        :("""=$(eff_cell("Mother~Client", weapon))\
+              /$(eff_cell("Mother~Shots per Kill", weapon))""")),
+    ("Mother~Refills per Kill",
+        :("""=$(eff_cell("Mother~Shots per Kill", weapon))\
               /$(stats_cell("Rounds per Refill", weapon))""")),
     ("pMother~Shots per Tumor",
         :("""=roundup($(enemy_cell("Body-Part HP", PMOTHER))\
                       /($(stats_cell("Damage", weapon))\
                         *$(stats_cell("Precision Multiplier", weapon))\
                         *$(enemy_cell("Critical Multiplier", PMOTHER))))""")),
-    ("pMother~Host",
-        :("""=if(($(eff_cell("pMother~Shots per Tumor", weapon))\
-                  -1)\
-                 *$(stats_cell("Damage", weapon))\
-                 *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Critical Multiplier", PMOTHER))\
-                 *8\
-                 >$(enemy_cell("HP", PMOTHER)),\
-                 roundup($(enemy_cell("HP", PMOTHER))\
-                         /($(stats_cell("Damage", weapon))\
-                           *$(stats_cell("Precision Multiplier", weapon))\
-                           *$(enemy_cell("Critical Multiplier", PMOTHER)))),\
-                 ($(eff_cell("pMother~Shots per Tumor", weapon))\
-                  -1)\
-                 *8\
-                 +roundup(($(enemy_cell("HP", PMOTHER))\
-                            -($(eff_cell("pMother~Shots per Tumor", weapon))\
-                              -1)\
-                            *$(stats_cell("Damage", weapon))\
-                            *$(stats_cell("Precision Multiplier", weapon))\
-                            *$(enemy_cell("Critical Multiplier", PMOTHER))\
-                            *8)\
-                           /($(enemy_cell("Body-Part HP", PMOTHER))\
-                             -($(eff_cell("pMother~Shots per Tumor", weapon))\
-                               -1)\
-                             *$(stats_cell("Damage", weapon))\
-                             *$(stats_cell("Precision Multiplier", weapon))\
-                             *$(enemy_cell("Critical Multiplier", PMOTHER)))))""")),
-    ("pMother~Client",
+    ("pMother~Shots per Kill",
         :("""=roundup($(enemy_cell("HP", PMOTHER))\
                       /($(stats_cell("Pellet Count", weapon))\
                         *min($(stats_cell("Damage", weapon))\
@@ -776,17 +680,11 @@ EFF_COLS = (
                              *$(enemy_cell("Critical Multiplier", PMOTHER))\
                              /$(stats_cell("Pellet Count", weapon)),\
                              $(enemy_cell("Body-Part HP", PMOTHER)))))""")),
-    ("pMother~Host Eff.",
+    ("pMother~Max Eff.",
         :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("pMother~Host", weapon))""")),
-    ("pMother~Client Eff.",
-        :("""=$(stats_cell("Rounds per Refill", weapon))\
-              /$(eff_cell("pMother~Client", weapon))""")),
-    ("pMother~Host Refills per Kill",
-        :("""=$(eff_cell("pMother~Host", weapon))\
-              /$(stats_cell("Rounds per Refill", weapon))""")),
-    ("pMother~Client Refills per Kill",
-        :("""=$(eff_cell("pMother~Client", weapon))\
+              /$(eff_cell("pMother~Shots per Kill", weapon))""")),
+    ("pMother~Refills per Kill",
+        :("""=$(eff_cell("pMother~Shots per Kill", weapon))\
               /$(stats_cell("Rounds per Refill", weapon))""")),
 )
 
@@ -824,12 +722,7 @@ gen_eff_string = @eval function(weapon)
         * SEP * string($(EFF_COLS[57][2])) * SEP * string($(EFF_COLS[58][2]))
         * SEP * string($(EFF_COLS[59][2])) * SEP * string($(EFF_COLS[60][2]))
         * SEP * string($(EFF_COLS[61][2])) * SEP * string($(EFF_COLS[62][2]))
-        * SEP * string($(EFF_COLS[63][2])) * SEP * string($(EFF_COLS[64][2]))
-        * SEP * string($(EFF_COLS[65][2])) * SEP * string($(EFF_COLS[66][2]))
-        * SEP * string($(EFF_COLS[67][2])) * SEP * string($(EFF_COLS[68][2]))
-        * SEP * string($(EFF_COLS[69][2])) * SEP * string($(EFF_COLS[70][2]))
-        * SEP * string($(EFF_COLS[71][2])) * SEP * string($(EFF_COLS[72][2]))
-        * "\n"
+        * SEP * string($(EFF_COLS[63][2])) * "\n"
     )
 end
 
