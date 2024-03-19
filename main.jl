@@ -2,7 +2,7 @@ VANILLA_DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profil
 # Vanilla
 DB_PATH = VANILLA_DB_PATH
 # Vanilla Reloaded
-#DB_PATH = "C:/Users/Admin/Documents/games/gtfo/modded/VanillaReloaded/BepInEx/plugins/VanillaReloaded"
+#DB_PATH = "C:/Users/Admin/Documents/games/gtfo/modding/VanillaReloaded/BepInEx/plugins/VanillaReloaded"
 # Inferno
 #DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profiles/inferno/BepInEx/plugins/Dovah-Inferno/Inferno"
 # Occlusion
