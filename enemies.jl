@@ -27,6 +27,7 @@ const BABY              = Enemy("Baby",                 5,   2, 2,    5,    2, "
 const FLYER             = Enemy("Flyer",             16.2,   3, 2,    4, 16.2, "N/A", "N/A",     "2 × 4%")
 const SCOUT             = Enemy("Scout",               42,   3, 2,    5,   42, "N/A", "N/A",     "3 × 4%")
 const ZOOMER_SCOUT      = Enemy("Zoomer Scout",        33,   3, 2,    5,   33, "N/A", "N/A",     "3 × 4%")
+const CSCOUT            = Enemy("Charger Scout",       60,   1, 2,    5,   25, "12%", "N/A",        "N/A")
 const SNATCHER          = Enemy("Snatcher",           225,   1, 2,   40,  225, "N/A", "17%",        "N/A")
 const MOTHER            = Enemy("Mother",            1000,   5, 1, 1000,  126, "N/A", "N/A",        "N/A")
 const PMOTHER           = Enemy("pMother",           2500,   5, 1, 2500,  313, "N/A", "N/A",        "N/A")
