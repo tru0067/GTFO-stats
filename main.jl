@@ -642,6 +642,73 @@ EFF_COLS = (
                          -1.25)\
                     /pi(),\
                     "No"))""")),
+    ("Zoomer Scout~Body",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Yes",\
+                 "No")""")),
+    ("Zoomer Scout~Back",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Yes",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", ZOOMER_SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon)))\
+                         -1.25)\
+                    /pi(),\
+                    "No"))""")),
+    ("Zoomer Scout~Head",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 *$(stats_cell("Precision Multiplier", weapon))\
+                 *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Yes",\
+                 "No")""")),
+    ("Zoomer Scout~Occiput",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 *$(stats_cell("Precision Multiplier", weapon))\
+                 *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Yes",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Occiput Multiplier", ZOOMER_SCOUT))\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", ZOOMER_SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon))\
+                            *$(stats_cell("Precision Multiplier", weapon))\
+                            *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT)))\
+                         -1.25)\
+                    /pi(),\
+                    "No"))""")),
     ("Charger Scout~Body",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -765,7 +832,9 @@ gen_eff_string = @eval function(weapon)
         * SEP * string($(EFF_COLS[57][2])) * SEP * string($(EFF_COLS[58][2]))
         * SEP * string($(EFF_COLS[59][2])) * SEP * string($(EFF_COLS[60][2]))
         * SEP * string($(EFF_COLS[61][2])) * SEP * string($(EFF_COLS[62][2]))
-        * SEP * string($(EFF_COLS[63][2])) * "\n"
+        * SEP * string($(EFF_COLS[63][2])) * SEP * string($(EFF_COLS[64][2]))
+        * SEP * string($(EFF_COLS[65][2])) * SEP * string($(EFF_COLS[66][2]))
+        * SEP * string($(EFF_COLS[67][2])) * "\n"
     )
 end
 
