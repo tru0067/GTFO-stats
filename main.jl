@@ -588,10 +588,23 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
-                 *$(enemy_cell("Back Multiplier", SCOUT))\
                  >$(enemy_cell("HP", SCOUT)),\
                  "Yes",\
-                 "No")""")),
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", SCOUT))\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon)))\
+                         -1.25)\
+                    /pi(),\
+                    "No"))""")),
     ("Scout~Head",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -608,10 +621,27 @@ EFF_COLS = (
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Occiput Multiplier", SCOUT))\
+                 *$(enemy_cell("Critical Multiplier", SCOUT))\
                  >$(enemy_cell("HP", SCOUT)),\
                  "Yes",\
-                 "No")""")),
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Occiput Multiplier", SCOUT))\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon))\
+                            *$(stats_cell("Precision Multiplier", weapon))\
+                            *$(enemy_cell("Critical Multiplier", SCOUT)))\
+                         -1.25)\
+                    /pi(),\
+                    "No"))""")),
     ("Charger Scout~Body",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -625,10 +655,23 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
-                 *$(enemy_cell("Back Multiplier", CSCOUT))\
                  >$(enemy_cell("HP", CSCOUT)),\
                  "Yes",\
-                 "No")""")),
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", CSCOUT))\
+                    >$(enemy_cell("HP", CSCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", CSCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon)))\
+                         -1.25)\
+                    /pi(),\
+                    "No"))""")),
     ("Tank~Shots per Tumor",
         :("""=roundup($(enemy_cell("Body-Part HP", TANK))\
                       /($(stats_cell("Damage", weapon))\
