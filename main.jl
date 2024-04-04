@@ -978,6 +978,8 @@ ENEMY_COLS = (
         :(enemy.stagger_hp)),
     ("Body-Part HP",
         :(enemy.bodypart_hp)),
+    ("Armor Multiplier",
+        :(enemy.armor_multi)),
     ("Melee Damage",
         :(enemy.melee_damage)),
     ("Tentacle Damage",
@@ -994,7 +996,7 @@ gen_enemy_string = @eval function(enemy)
         * SEP * string($(ENEMY_COLS[5][2]))  * SEP * string($(ENEMY_COLS[6][2]))
         * SEP * string($(ENEMY_COLS[7][2]))  * SEP * string($(ENEMY_COLS[8][2]))
         * SEP * string($(ENEMY_COLS[9][2]))  * SEP * string($(ENEMY_COLS[10][2]))
-        * "\n"
+        * SEP * string($(ENEMY_COLS[11][2])) * "\n"
     )
 end
 
