@@ -588,23 +588,10 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
+                 *$(enemy_cell("Back Multiplier", SCOUT))\
                  >$(enemy_cell("HP", SCOUT)),\
                  "Yes",\
-                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
-                       $(stats_cell("Burst Count", weapon)),\
-                       1)\
-                    *$(stats_cell("Damage", weapon))\
-                    *$(enemy_cell("Back Multiplier", SCOUT))\
-                    >$(enemy_cell("HP", SCOUT)),\
-                    180\
-                    *acos($(enemy_cell("HP", SCOUT))\
-                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
-                               $(stats_cell("Burst Count", weapon)),\
-                               1)\
-                            *$(stats_cell("Damage", weapon)))\
-                         -1.25)\
-                    /pi(),\
-                    "No"))""")),
+                 "No")""")),
     ("Scout~Head",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -621,9 +608,41 @@ EFF_COLS = (
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Critical Multiplier", SCOUT))\
+                 *$(enemy_cell("Occiput Multiplier", SCOUT))\
                  >$(enemy_cell("HP", SCOUT)),\
                  "Yes",\
+                 "No")""")),
+    ("Scout~Angle for Back",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 >$(enemy_cell("HP", SCOUT)),\
+                 "Always",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", SCOUT))\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon)))\
+                         -1.25)\
+                    /pi(),\
+                    "Never"))""")),
+    ("Scout~Angle for Occiput",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 *$(stats_cell("Precision Multiplier", weapon))\
+                 *$(enemy_cell("Critical Multiplier", SCOUT))\
+                 >$(enemy_cell("HP", SCOUT)),\
+                 "Always",\
                  if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                        $(stats_cell("Burst Count", weapon)),\
                        1)\
@@ -641,7 +660,7 @@ EFF_COLS = (
                             *$(enemy_cell("Critical Multiplier", SCOUT)))\
                          -1.25)\
                     /pi(),\
-                    "No"))""")),
+                    "Never"))""")),
     ("Zoomer Scout~Body",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -655,23 +674,10 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
+                 *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
                  >$(enemy_cell("HP", ZOOMER_SCOUT)),\
                  "Yes",\
-                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
-                       $(stats_cell("Burst Count", weapon)),\
-                       1)\
-                    *$(stats_cell("Damage", weapon))\
-                    *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
-                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
-                    180\
-                    *acos($(enemy_cell("HP", ZOOMER_SCOUT))\
-                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
-                               $(stats_cell("Burst Count", weapon)),\
-                               1)\
-                            *$(stats_cell("Damage", weapon)))\
-                         -1.25)\
-                    /pi(),\
-                    "No"))""")),
+                 "No")""")),
     ("Zoomer Scout~Head",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -688,9 +694,41 @@ EFF_COLS = (
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
-                 *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
+                 *$(enemy_cell("Occiput Multiplier", ZOOMER_SCOUT))\
                  >$(enemy_cell("HP", ZOOMER_SCOUT)),\
                  "Yes",\
+                 "No")""")),
+    ("Zoomer Scout~Angle for Back",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Always",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    180\
+                    *acos($(enemy_cell("HP", ZOOMER_SCOUT))\
+                          /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                               $(stats_cell("Burst Count", weapon)),\
+                               1)\
+                            *$(stats_cell("Damage", weapon)))\
+                         -1.25)\
+                    /pi(),\
+                    "Never"))""")),
+    ("Zoomer Scout~Angle for Occiput",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 *$(stats_cell("Precision Multiplier", weapon))\
+                 *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
+                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Always",\
                  if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                        $(stats_cell("Burst Count", weapon)),\
                        1)\
@@ -708,7 +746,7 @@ EFF_COLS = (
                             *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT)))\
                          -1.25)\
                     /pi(),\
-                    "No"))""")),
+                    "Never"))""")),
     ("Charger Scout~Body",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -722,8 +760,17 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
+                 *$(enemy_cell("Back Multiplier", CSCOUT))\
                  >$(enemy_cell("HP", CSCOUT)),\
                  "Yes",\
+                 "No")""")),
+    ("Charger Scout~Angle for Back",
+        :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                    $(stats_cell("Burst Count", weapon)),\
+                    1)\
+                 *$(stats_cell("Damage", weapon))\
+                 >$(enemy_cell("HP", CSCOUT)),\
+                 "Always",\
                  if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                        $(stats_cell("Burst Count", weapon)),\
                        1)\
@@ -738,7 +785,7 @@ EFF_COLS = (
                             *$(stats_cell("Damage", weapon)))\
                          -1.25)\
                     /pi(),\
-                    "No"))""")),
+                    "Never"))""")),
     ("Tank~Shots per Tumor",
         :("""=roundup($(enemy_cell("Body-Part HP", TANK))\
                       /($(stats_cell("Damage", weapon))\
@@ -798,6 +845,7 @@ EFF_COLS = (
               /$(stats_cell("Rounds per Refill", weapon))""")),
 )
 
+
 gen_eff_string = @eval function(weapon)
     wdb = weapon[2]
     return (
@@ -834,9 +882,13 @@ gen_eff_string = @eval function(weapon)
         * SEP * string($(EFF_COLS[61][2])) * SEP * string($(EFF_COLS[62][2]))
         * SEP * string($(EFF_COLS[63][2])) * SEP * string($(EFF_COLS[64][2]))
         * SEP * string($(EFF_COLS[65][2])) * SEP * string($(EFF_COLS[66][2]))
-        * SEP * string($(EFF_COLS[67][2])) * "\n"
+        * SEP * string($(EFF_COLS[67][2])) * SEP * string($(EFF_COLS[68][2]))
+        * SEP * string($(EFF_COLS[69][2])) * SEP * string($(EFF_COLS[70][2]))
+        * SEP * string($(EFF_COLS[71][2])) * SEP * string($(EFF_COLS[72][2]))
+        * "\n"
     )
 end
+
 
 function eff_cell(col_name, weapon)
     c = "B"
