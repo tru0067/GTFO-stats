@@ -580,18 +580,48 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
-                 >$(enemy_cell("HP", SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *0.1\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon)))))""")),
     ("Scout~Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(enemy_cell("Back Multiplier", SCOUT))\
-                 >$(enemy_cell("HP", SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(enemy_cell("Back Multiplier", SCOUT)))))""")),
     ("Scout~Head",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -599,9 +629,27 @@ EFF_COLS = (
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
                  *$(enemy_cell("Critical Multiplier", SCOUT))\
-                 >$(enemy_cell("HP", SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Critical Multiplier", SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(stats_cell("Precision Multiplier", weapon))\
+                       *$(enemy_cell("Critical Multiplier", SCOUT)))))""")),
     ("Scout~Occiput",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -609,9 +657,27 @@ EFF_COLS = (
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
                  *$(enemy_cell("Occiput Multiplier", SCOUT))\
-                 >$(enemy_cell("HP", SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Occiput Multiplier", SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(stats_cell("Precision Multiplier", weapon))\
+                       *$(enemy_cell("Occiput Multiplier", SCOUT)))))""")),
     ("Scout~Angle for Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -666,18 +732,48 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
-                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *0.1\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", ZOOMER_SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon)))))""")),
     ("Zoomer Scout~Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
-                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", ZOOMER_SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(enemy_cell("Back Multiplier", ZOOMER_SCOUT)))))""")),
     ("Zoomer Scout~Head",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -685,9 +781,27 @@ EFF_COLS = (
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
                  *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
-                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", ZOOMER_SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(stats_cell("Precision Multiplier", weapon))\
+                       *$(enemy_cell("Critical Multiplier", ZOOMER_SCOUT)))))""")),
     ("Zoomer Scout~Occiput",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -695,9 +809,27 @@ EFF_COLS = (
                  *$(stats_cell("Damage", weapon))\
                  *$(stats_cell("Precision Multiplier", weapon))\
                  *$(enemy_cell("Occiput Multiplier", ZOOMER_SCOUT))\
-                 >$(enemy_cell("HP", ZOOMER_SCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(stats_cell("Precision Multiplier", weapon))\
+                    *$(enemy_cell("Occiput Multiplier", ZOOMER_SCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", ZOOMER_SCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", ZOOMER_SCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(stats_cell("Precision Multiplier", weapon))\
+                       *$(enemy_cell("Occiput Multiplier", ZOOMER_SCOUT)))))""")),
     ("Zoomer Scout~Angle for Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
@@ -752,18 +884,48 @@ EFF_COLS = (
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
-                 >$(enemy_cell("HP", CSCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", CSCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *0.1\
+                    >$(enemy_cell("HP", CSCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", CSCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon)))))""")),
     ("Charger Scout~Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
                     1)\
                  *$(stats_cell("Damage", weapon))\
                  *$(enemy_cell("Back Multiplier", CSCOUT))\
-                 >$(enemy_cell("HP", CSCOUT)),\
-                 "Yes",\
-                 "No")""")),
+                 <$(enemy_cell("HP", CSCOUT)),\
+                 "Never",\
+                 if(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                       $(stats_cell("Burst Count", weapon)),\
+                       1)\
+                    *$(stats_cell("Damage", weapon))\
+                    *$(enemy_cell("Back Multiplier", CSCOUT))\
+                    *0.1\
+                    >$(enemy_cell("HP", CSCOUT)),\
+                    "Always",\
+                    $(stats_cell("Falloff End", weapon))\
+                    -$(enemy_cell("HP", CSCOUT))\
+                     *($(stats_cell("Falloff End", weapon))\
+                       -$(stats_cell("Falloff Start", weapon)))\
+                     /(if($(stats_cell("Fire Mode", weapon))="Burst",\
+                          $(stats_cell("Burst Count", weapon)),\
+                          1)\
+                       *$(stats_cell("Damage", weapon))\
+                       *$(enemy_cell("Back Multiplier", CSCOUT)))))""")),
     ("Charger Scout~Angle for Back",
         :("""=if(if($(stats_cell("Fire Mode", weapon))="Burst",\
                     $(stats_cell("Burst Count", weapon)),\
