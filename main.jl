@@ -1,14 +1,6 @@
-VANILLA_DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profiles/gamedatadump/BepInEx/GameData-Dump/34850"
+VANILLA_DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\gamedatadump\\BepInEx\\GameData-Dump\\34855"
 # Vanilla
 DB_PATH = VANILLA_DB_PATH
-# Vanilla Reloaded
-#DB_PATH = "C:/Users/Admin/Documents/games/gtfo/modding/VanillaReloaded/BepInEx/plugins/VanillaReloaded"
-# Inferno
-#DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profiles/inferno/BepInEx/plugins/Dovah-Inferno/Inferno"
-# Occlusion
-#DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profiles/occlusion/BepInEx/plugins/Dakstar-Occlusion/Occlusion"
-# Breakthrough
-#DB_PATH = "C:/Users/Admin/AppData/Roaming/r2modmanPlus-local/GTFO/profiles/breakthrough/BepInEx/plugins/GTFO_Modding_Admin_Team-BREAKTHROUGH_2/Breakthrough 2"
 
 include("enemies.jl")
 include("read_datablocks.jl")
