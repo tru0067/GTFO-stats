@@ -95,6 +95,10 @@ TOOLS = []
 # them.
 function process_player_offline_gear()
     for player_offline_gear in _PlayerOfflineGear["Blocks"]
+        if !player_offline_gear["internalEnabled"]
+            # Skip if not enabled.
+            continue
+        end
         gear_json = JSON.parse(player_offline_gear["GearJSON"])
         for (_, component) in gear_json["Packet"]["Comps"]
             if isa(component, Dict)
