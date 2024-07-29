@@ -275,9 +275,9 @@ EFF_COLS = (
               /$(eff_cell("Striker~Body", weapon))""")),
     ("Shooter~HS+BS",
         :("""=if(and(max(roundup($(enemy_cell("HP", SHOOTER))\
-                                /($(stats_cell("Damage", weapon))\
-                                  *$(stats_cell("Precision Multiplier", weapon))\
-                                  *$(enemy_cell("Critical Multiplier", SHOOTER))))\
+                                 /($(stats_cell("Damage", weapon))\
+                                   *$(stats_cell("Precision Multiplier", weapon))\
+                                   *$(enemy_cell("Critical Multiplier", SHOOTER))))\
                          -1,\
                          0)\
                      *($(stats_cell("Damage", weapon))\
@@ -287,11 +287,27 @@ EFF_COLS = (
                      >$(enemy_cell("HP", SHOOTER)),\
                      $(stats_cell("Damage", weapon))\
                      <$(enemy_cell("HP", SHOOTER))),\
-                 roundup($(enemy_cell("HP", SHOOTER))\
-                         /($(stats_cell("Damage", weapon))\
-                           *$(stats_cell("Precision Multiplier", weapon))\
-                           *$(enemy_cell("Critical Multiplier", SHOOTER))))\
-                 -1&"+1",\
+                 roundup(($(enemy_cell("HP", SHOOTER))\
+                          /$(stats_cell("Damage", weapon))\
+                          -roundup($(enemy_cell("HP", SHOOTER))\
+                                   /($(stats_cell("Damage", weapon))\
+                                     *$(stats_cell("Precision Multiplier", weapon))\
+                                     *$(enemy_cell("Critical Multiplier", SHOOTER)))))\
+                         /($(stats_cell("Precision Multiplier", weapon))\
+                           *$(enemy_cell("Critical Multiplier", SHOOTER))\
+                           -1))\
+                 &"+"&\
+                 rounddown((roundup($(enemy_cell("HP", SHOOTER))\
+                                    /($(stats_cell("Damage", weapon))\
+                                      *$(stats_cell("Precision Multiplier", weapon))\
+                                      *$(enemy_cell("Critical Multiplier", SHOOTER))))\
+                            *$(stats_cell("Precision Multiplier", weapon))\
+                            *$(enemy_cell("Critical Multiplier", SHOOTER))\
+                            -$(enemy_cell("HP", SHOOTER))\
+                            /$(stats_cell("Damage", weapon)))\
+                           /($(stats_cell("Precision Multiplier", weapon))\
+                             *$(enemy_cell("Critical Multiplier", SHOOTER))\
+                             -1)),\
                  roundup($(enemy_cell("HP", SHOOTER))\
                          /($(stats_cell("Damage", weapon))\
                            *$(stats_cell("Precision Multiplier", weapon))\
@@ -385,9 +401,9 @@ EFF_COLS = (
               /$(eff_cell("Giant~Body", weapon))""")),
     ("Big Shooter/Hybrid~Head",
         :("""=if(and(max(roundup($(enemy_cell("HP", BIG_SHOOTER))\
-                                /($(stats_cell("Damage", weapon))\
-                                  *$(stats_cell("Precision Multiplier", weapon))\
-                                  *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))))\
+                                 /($(stats_cell("Damage", weapon))\
+                                   *$(stats_cell("Precision Multiplier", weapon))\
+                                   *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))))\
                          -1,\
                          0)\
                      *($(stats_cell("Damage", weapon))\
@@ -397,11 +413,27 @@ EFF_COLS = (
                      >$(enemy_cell("HP", BIG_SHOOTER)),\
                      $(stats_cell("Damage", weapon))\
                      <$(enemy_cell("HP", BIG_SHOOTER))),\
-                 roundup($(enemy_cell("HP", BIG_SHOOTER))\
-                         /($(stats_cell("Damage", weapon))\
-                           *$(stats_cell("Precision Multiplier", weapon))\
-                           *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))))\
-                 -1&"+1",\
+                 roundup(($(enemy_cell("HP", BIG_SHOOTER))\
+                          /$(stats_cell("Damage", weapon))\
+                          -roundup($(enemy_cell("HP", BIG_SHOOTER))\
+                                   /($(stats_cell("Damage", weapon))\
+                                     *$(stats_cell("Precision Multiplier", weapon))\
+                                     *$(enemy_cell("Critical Multiplier", BIG_SHOOTER)))))\
+                         /($(stats_cell("Precision Multiplier", weapon))\
+                           *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))\
+                           -1))\
+                 &"+"&\
+                 rounddown((roundup($(enemy_cell("HP", BIG_SHOOTER))\
+                                    /($(stats_cell("Damage", weapon))\
+                                      *$(stats_cell("Precision Multiplier", weapon))\
+                                      *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))))\
+                            *$(stats_cell("Precision Multiplier", weapon))\
+                            *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))\
+                            -$(enemy_cell("HP", BIG_SHOOTER))\
+                            /$(stats_cell("Damage", weapon)))\
+                           /($(stats_cell("Precision Multiplier", weapon))\
+                             *$(enemy_cell("Critical Multiplier", BIG_SHOOTER))\
+                             -1)),\
                  roundup($(enemy_cell("HP", BIG_SHOOTER))\
                          /($(stats_cell("Damage", weapon))\
                            *$(stats_cell("Precision Multiplier", weapon))\
