@@ -2,7 +2,7 @@ VANILLA_DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\gameda
 # Vanilla
 DB_PATH = VANILLA_DB_PATH
 # Chrysalis
-DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\chrysalis\\BepInEx\\plugins\\Sam_D_B-Chrysalis\\Samdown_Chrysalis_New"
+#DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\chrysalis\\BepInEx\\plugins\\Sam_D_B-Chrysalis\\Samdown_Chrysalis_New"
 
 include("enemies.jl")
 include("read_datablocks.jl")
