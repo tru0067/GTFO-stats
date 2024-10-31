@@ -3,6 +3,10 @@ VANILLA_DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\gameda
 DB_PATH = VANILLA_DB_PATH
 # Chrysalis
 #DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\chrysalis\\BepInEx\\plugins\\Sam_D_B-Chrysalis\\Samdown_Chrysalis_New"
+# Legacy
+#DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\legacy\\BepInEx\\plugins\\Inas07-Legacy\\LEGACY"
+# Cortex Star
+DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\cortexstar\\BepInEx\\plugins\\Allets-Cortex_Star"
 
 include("enemies.jl")
 include("read_datablocks.jl")
