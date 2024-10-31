@@ -34,9 +34,9 @@ const NIGHTMARE_SCOUT   = Enemy("Nightmare Scout",    161,   1, 2,   15,   81,  
 const SNATCHER          = Enemy("Snatcher",           225,   1, 2,   40,  225,    0.2, "N/A", "17%",        "N/A")
 const MOTHER            = Enemy("Mother",            1000,   5, 1, 1000,  126,  0.001, "N/A", "N/A",        "N/A")
 const PMOTHER           = Enemy("pMother",           2500,   5, 1, 2500,  313,  0.001, "N/A", "N/A",        "N/A")
-const MEGA_MOTHER       = Enemy("Mega Mother",       5000,   3, 1, 5000,  313,  0.001, "N/A",   "?",          "?")
+const MEGA_MOTHER       = Enemy("Mega Mother",       5000,   3, 1, 5000,  313,  0.001, "N/A", "12%",          "?")
 const TANK              = Enemy("Tank",              1000,   3, 1,  400,  150,   0.01, "32%", "14%",        "N/A")
-const POTATO            = Enemy("Potato",             640, 1.1, 2,  640,  650,  "N/A",   "?",   "?",          "?")
+const POTATO            = Enemy("Potato",             640, 1.1, 2,  640,  650,  "N/A", "40%", "N/A",          "?")
 
 const ENEMIES = (
     STRIKER, SHOOTER, GIANT, BIG_SHOOTER, HYBRID, SHADOW, CHARGER, NIGHTMARE_STRIKER,
