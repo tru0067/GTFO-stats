@@ -105,11 +105,15 @@ function process_player_offline_gear()
                 if component["c"] == 3
                     # Main weapon.
                     if component["v"] == 108 || component["v"] == 156
-                        process_gear_json(gear_json, MAIN_WEAPONS)
+                        archetype = get_archetype_from_gear_json(gear_json)
+                        name = get_name_from_archetype(archetype)
+                        push!(MAIN_WEAPONS, (name, archetype))
                     end
                     # Special weapon.
                     if component["v"] == 109 || component["v"] == 110
-                        process_gear_json(gear_json, SPECIAL_WEAPONS)
+                        archetype = get_archetype_from_gear_json(gear_json)
+                        name = get_name_from_archetype(archetype)
+                        push!(SPECIAL_WEAPONS, (name, archetype))
                     end
                 end
             end
@@ -119,7 +123,7 @@ end
 
 # Processes the Gear JSON for a given weapon, determining its GearCategory persistent ID and the
 # weapon's fire mode.
-function process_gear_json(gear_json, weapons_list)
+function get_archetype_from_gear_json(gear_json)
     gear_category_id = 0
     fire_mode = 0
     for (_, component) in gear_json["Packet"]["Comps"]
@@ -145,31 +149,34 @@ function process_gear_json(gear_json, weapons_list)
     elseif fire_mode == 2
         fire_mode = "AutoArchetype"
     end
-    process_gear_category(gear_category_id, fire_mode, weapons_list)
+    return get_archetype_from_gear_category(gear_category_id, fire_mode)
 end
 
 # Processes the GearCategory entry for a given weapon, determining which Archetype block to use.
-function process_gear_category(gear_category_id, fire_mode, weapons_list)
+function get_archetype_from_gear_category(gear_category_id, fire_mode)
     for gear_category in _GearCategory["Blocks"]
         if gear_category["persistentID"] == gear_category_id
             archetype_id = gear_category[fire_mode]
-            process_archetype(archetype_id, weapons_list)
+            return get_archetype_from_archetype(archetype_id)
         end
     end
 end
 
-# Adds the Archetype entry for a given weapon to the weapon list!
-function process_archetype(archetype_id, weapons_list)
+# Processes the Archetype datablock to find a given archetype_id.
+function get_archetype_from_archetype(archetype_id)
     for archetype in _Archetype["Blocks"]
         if archetype["persistentID"] == archetype_id
-            # Determine the name for the weapon to use.
-            if haskey(_WEAPON_NAMES, archetype["name"])
-                weapon_name = _WEAPON_NAMES[archetype["name"]]
-            else
-                weapon_name = archetype["name"]
-            end
-            push!(weapons_list, (weapon_name, archetype))
+            return archetype
         end
+    end
+end
+
+# Get a name from _WEAPON_NAMES if it exists, otherwise use the archetype's name.
+function get_name_from_archetype(archetype)
+    if haskey(_WEAPON_NAMES, archetype["name"])
+        return _WEAPON_NAMES[archetype["name"]]
+    else
+        return archetype["name"]
     end
 end
 
