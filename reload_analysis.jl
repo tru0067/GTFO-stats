@@ -17,7 +17,7 @@ function reload_cancel_multiplier(reload_sequence)
         if trigger["TriggerTime"] > highest_time
             highest_time = trigger["TriggerTime"]
         end
-        if trigger["Type"] == 6
+        if trigger["Type"] == 6 || trigger["Type"] == "DoUpdateAmmo"
             ammo_load_time = highest_time
         end
     end
