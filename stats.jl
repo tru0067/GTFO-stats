@@ -1,12 +1,10 @@
 VANILLA_DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\GameData-Dump\\BepInEx\\GameData-Dump\\34855"
-# Vanilla
-DB_PATH = VANILLA_DB_PATH
-# Chrysalis
-#DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\chrysalis\\BepInEx\\plugins\\Sam_D_B-Chrysalis\\Samdown_Chrysalis_New"
-# Legacy
-#DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\legacy\\BepInEx\\plugins\\Inas07-Legacy\\LEGACY"
-# Cortex Star
-#DB_PATH = ENV["APPDATA"] * "\\r2modmanPlus-local\\GTFO\\profiles\\cortexstar\\BepInEx\\plugins\\Allets-Cortex_Star"
+if length(ARGS) > 0
+    # Path supplied as command line argument.
+    DB_PATH = ARGS[1]
+else
+    DB_PATH = VANILLA_DB_PATH
+end
 
 include("enemies.jl")
 include("read_datablocks.jl")
