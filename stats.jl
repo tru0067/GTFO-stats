@@ -10,6 +10,7 @@ DB_PATH = VANILLA_DB_PATH
 
 include("enemies.jl")
 include("read_datablocks.jl")
+include("reload_analysis.jl")
 include("weapon_analysis.jl")
 
 SEP = "\t"  # Separator to use in the CSV file.
@@ -68,8 +69,14 @@ STATS_COLS = (
         :(wdb["CostOfBullet"])),
     ("Piercing",
         :(wdb["PiercingBullets"] ? wdb["PiercingDamageCountLimit"] : "N/A")),
-    ("Reload Time",
+    ("Reload",
         :(wdb["DefaultReloadTime"])),
+    ("Actual Reload",
+        :("""=$(stats_cell("Reload", weapon))\
+              *$(actual_reload_multiplier(weapon[3]))""")),
+    ("Reload Cancel",
+        :("""=$(stats_cell("Reload", weapon))\
+              *$(reload_cancel_multiplier(weapon[3]))""")),
     ("Shot Delay",
         :(wdb["ShotDelay"])),
     ("Burst Delay",
@@ -158,7 +165,8 @@ gen_stats_string = @eval function(weapon; main=true)
         * SEP * string($(STATS_COLS[21][2])) * SEP * string($(STATS_COLS[22][2]))
         * SEP * string($(STATS_COLS[23][2])) * SEP * string($(STATS_COLS[24][2]))
         * SEP * string($(STATS_COLS[25][2])) * SEP * string($(STATS_COLS[26][2]))
-        * SEP * string($(STATS_COLS[27][2])) * "\n"
+        * SEP * string($(STATS_COLS[27][2])) * SEP * string($(STATS_COLS[28][2]))
+        * SEP * string($(STATS_COLS[29][2])) * "\n"
     )
 end
 

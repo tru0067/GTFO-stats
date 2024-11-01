@@ -59,31 +59,43 @@ if isfile("$DB_PATH/GameData_PlayerOfflineGearDataBlock_bin.json")
     _PlayerOfflineGear = JSON.parsefile("$DB_PATH/GameData_PlayerOfflineGearDataBlock_bin.json")
 else
     _PlayerOfflineGear = JSON.parsefile("$VANILLA_DB_PATH/GameData_PlayerOfflineGearDataBlock_bin.json")
-    println("PlayerOfflineGear not found, using Vanilla datablock")
+    println("PlayerOfflineGear not found, using vanilla datablock")
 end
 if isfile("$DB_PATH/GameData_GearCategoryDataBlock_bin.json")
     _GearCategory      = JSON.parsefile("$DB_PATH/GameData_GearCategoryDataBlock_bin.json")
 else
     _GearCategory      = JSON.parsefile("$VANILLA_DB_PATH/GameData_GearCategoryDataBlock_bin.json")
-    println("GearCategory not found, using Vanilla datablock")
+    println("GearCategory not found, using vanilla datablock")
 end
 if isfile("$DB_PATH/GameData_ArchetypeDataBlock_bin.json")
     _Archetype         = JSON.parsefile("$DB_PATH/GameData_ArchetypeDataBlock_bin.json")
 else
     _Archetype         = JSON.parsefile("$VANILLA_DB_PATH/GameData_ArchetypeDataBlock_bin.json")
-    println("Archetype not found, using Vanilla datablock")
+    println("Archetype not found, using vanilla datablock")
 end
 if isfile("$DB_PATH/GameData_MeleeArchetypeDataBlock_bin.json")
     _MeleeArchetype    = JSON.parsefile("$DB_PATH/GameData_MeleeArchetypeDataBlock_bin.json")
 else
     _MeleeArchetype    = JSON.parsefile("$VANILLA_DB_PATH/GameData_MeleeArchetypeDataBlock_bin.json")
-    println("MeleeArchetype not found, using Vanilla datablock")
+    println("MeleeArchetype not found, using vanilla datablock")
 end
 if isfile("$DB_PATH/GameData_MeleeAnimationSetDataBlock_bin.json")
     _MeleeAnimationSet = JSON.parsefile("$DB_PATH/GameData_MeleeAnimationSetDataBlock_bin.json")
 else
     _MeleeAnimationSet = JSON.parsefile("$VANILLA_DB_PATH/GameData_MeleeAnimationSetDataBlock_bin.json")
-    println("MeleeAnimationSet not found, using Vanilla datablock")
+    println("MeleeAnimationSet not found, using vanilla datablock")
+end
+if isfile("$DB_PATH/GameData_GearFrontPartDataBlock_bin.json")
+    _GearFrontPart = JSON.parsefile("$DB_PATH/GameData_GearFrontPartDataBlock_bin.json")
+else
+    _GearFrontPart = JSON.parsefile("$VANILLA_DB_PATH/GameData_GearFrontPartDataBlock_bin.json")
+    println("GearFrontPart not found, using vanilla datablock")
+end
+if isfile("$DB_PATH/GameData_GearStockPartDataBlock_bin.json")
+    _GearStockPart = JSON.parsefile("$DB_PATH/GameData_GearStockPartDataBlock_bin.json")
+else
+    _GearStockPart = JSON.parsefile("$VANILLA_DB_PATH/GameData_GearStockPartDataBlock_bin.json")
+    println("GearStockPart not found, using vanilla datablock")
 end
 
 MAIN_WEAPONS = []
@@ -107,13 +119,16 @@ function process_player_offline_gear()
                     if component["v"] == 108 || component["v"] == 156
                         archetype = get_archetype_from_gear_json(gear_json)
                         name = get_name_from_archetype(archetype)
-                        push!(MAIN_WEAPONS, (name, archetype))
+                        reload_sequence = get_reload_sequence_from_gear_json(gear_json)
+                        push!(MAIN_WEAPONS, (name, archetype, reload_sequence))
+
                     end
                     # Special weapon.
                     if component["v"] == 109 || component["v"] == 110
                         archetype = get_archetype_from_gear_json(gear_json)
                         name = get_name_from_archetype(archetype)
-                        push!(SPECIAL_WEAPONS, (name, archetype))
+                        reload_sequence = get_reload_sequence_from_gear_json(gear_json)
+                        push!(SPECIAL_WEAPONS, (name, archetype, reload_sequence))
                     end
                 end
             end
@@ -177,6 +192,65 @@ function get_name_from_archetype(archetype)
         return _WEAPON_NAMES[archetype["name"]]
     else
         return archetype["name"]
+    end
+end
+
+# Processes the Gear JSON for a given weapon, finding both the front and stock parts, and then using
+# those to look for the reload sequence.
+function get_reload_sequence_from_gear_json(gear_json)
+    found_gear_front_part_id = false
+    found_gear_stock_part_id = false
+    gear_front_part_id = 0
+    gear_stock_part_id = 0
+    for (_, component) in gear_json["Packet"]["Comps"]
+        if isa(component, Dict)
+            if component["c"] == 12
+                found_gear_front_part_id = true
+                gear_front_part_id = component["v"]
+            end
+            if component["c"] == 19
+                found_gear_stock_part_id = true
+                gear_stock_part_id = component["v"]
+            end
+        end
+    end
+
+    if !found_gear_front_part_id || !found_gear_stock_part_id
+        println("Didn't find front and/or stock parts, cannot determine reload sequence.")
+        return []
+    end
+
+    if found_gear_front_part_id
+        gear_front_part_reload_sequence = get_reload_sequence_from_gear_part(gear_front_part_id, _GearFrontPart)
+    end
+    if found_gear_stock_part_id
+        gear_stock_part_reload_sequence = get_reload_sequence_from_gear_part(gear_stock_part_id, _GearStockPart)
+    end
+
+    if length(gear_front_part_reload_sequence) == 0 && length(gear_stock_part_reload_sequence) == 0
+        println("Only found empty reload sequences, cannot determine reload stats.")
+        return []
+    end
+    if length(gear_front_part_reload_sequence) > 0 && length(gear_stock_part_reload_sequence) > 0
+        println("Found two non-empty reload sequences, cannot tie-break reload stats.")
+        return []
+    end
+
+    if length(gear_front_part_reload_sequence) > 0
+        return gear_front_part_reload_sequence
+    end
+    if length(gear_stock_part_reload_sequence) > 0
+        return gear_stock_part_reload_sequence
+    end
+    return []
+end
+
+# Processes the gear front/stock part datablock to find the reload sequence for the given id.
+function get_reload_sequence_from_gear_part(gear_part_id, gear_part_datablock)
+    for gear_part in gear_part_datablock["Blocks"]
+        if gear_part["persistentID"] == gear_part_id
+            return gear_part["ReloadSequence"]
+        end
     end
 end
 
