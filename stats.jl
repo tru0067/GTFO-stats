@@ -141,7 +141,7 @@ STATS_COLS = (
                       +$(stats_cell("Shot Delay", weapon))\
                       *($(stats_cell("Clip Size", weapon))-1))""")),
     ("Fire Mode",
-        :(wdb["FireMode"] == SEMI ? "Semi" : (wdb["FireMode"]) == BURST ? "Burst" : "Auto")),
+        :(wdb["FireMode"] == AUTO ? "Auto" : (wdb["FireMode"]) == SEMI ? "Semi" : "Burst")),
     #("Flashlight",
     #    ""),
 )

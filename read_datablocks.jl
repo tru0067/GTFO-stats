@@ -163,6 +163,8 @@ function get_archetype_from_gear_json(gear_json)
         fire_mode = "BurstArchetype"
     elseif fire_mode == 2
         fire_mode = "AutoArchetype"
+    elseif fire_mode == 3
+        fire_mode = "SemiBurstArchetype"
     end
     return get_archetype_from_gear_category(gear_category_id, fire_mode)
 end
