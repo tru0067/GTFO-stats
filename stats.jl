@@ -117,6 +117,10 @@ STATS_COLS = (
                   $(stats_cell("Fire Mode", weapon))="Auto",\
                       $(stats_cell("Damage", weapon))\
                       /$(stats_cell("Shot Delay", weapon)))""")),
+    ("DPS (Sustained)",
+        :("""=$(stats_cell("Damage per Clip", weapon))\
+              /($(stats_cell("Time to Empty Clip", weapon))\
+                +$(stats_cell("Reload Cancel", weapon)))""")),
     ("Time to Empty Clip",
         :("""=ifs($(stats_cell("Fire Mode", weapon))="Semi",\
                       max($(stats_cell("Shot Delay", weapon)),\
@@ -162,7 +166,8 @@ gen_stats_string = @eval function(weapon; main=true)
         * SEP * string($(STATS_COLS[23][2])) * SEP * string($(STATS_COLS[24][2]))
         * SEP * string($(STATS_COLS[25][2])) * SEP * string($(STATS_COLS[26][2]))
         * SEP * string($(STATS_COLS[27][2])) * SEP * string($(STATS_COLS[28][2]))
-        * SEP * string($(STATS_COLS[29][2])) * "\n"
+        * SEP * string($(STATS_COLS[29][2])) * SEP * string($(STATS_COLS[30][2]))
+        * SEP * string($(STATS_COLS[31][2])) * "\n"
     )
 end
 
